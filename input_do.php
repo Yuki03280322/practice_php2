@@ -19,16 +19,13 @@
 <h2>Practice</h2>
 <pre>
 <?php
-try {
-  $db = new PDO('mysql:dbname=mydb;host=localhost;charset=utf8', 'root', 'root');
-  $statement = $db->prepare('INSERT INTO memos SET memo=?, created_at=NOW()');
-  $statement->execute(array($_POST['memo']));
-  echo 'メッセージが登録されました';
+require('dbconnect.php');
+$statement = $db->prepare('INSERT INTO memos SET memo=?, created_at=NOW()');
+$statement->execute(array($_POST['memo']));
+echo 'メッセージが登録されました';
   // $db->exec('INSERT INTO memos SET memo="' . $_POST['memo'] . '", created_at=NOW()');
-} catch(PDOException $e) {
-  echo 'DB接続エラー: ' . $e->getMessage();
-}
 ?>
+<br><a href="index2.php">一覧画面へ</a>
 </pre>
 <!--
 このSQLはmemosテーブルに入力された情報と現在時刻を保存するためのもの
